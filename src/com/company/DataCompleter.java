@@ -78,6 +78,7 @@ public class DataCompleter {
             String haplogroup="NULL";
             String haplotype="NULL";
             String quality="NULL";
+
             if(entryList == null){
                 haplogroup = "NULL";
                 haplotype = "NULL";
@@ -131,8 +132,8 @@ public class DataCompleter {
 
             // write new header
             if (!isheaderWritter) {
-                metaInfoReader.addToHeader(",percentage_N,user_alias,haplogroup_current_versions,haplotype_current_versions,quality_haplotype_current_version, mt_sequence");
-                metaInfoReader.addTotypes(",real,String,String,String,int,String");
+                metaInfoReader.addToHeader(",percentage_N,user_alias,haplogroup_current_versions,macro_haplogroup,haplotype_current_versions,quality_haplotype_current_version, mt_sequence");
+                metaInfoReader.addTotypes(",real,String,String,String,String,int,String");
                 data_meta_file_updated.write(metaInfoReader.getHeader());
                 data_meta_file_updated.newLine();
                 data_meta_file_updated.write(metaInfoReader.getTypes());
@@ -144,8 +145,8 @@ public class DataCompleter {
 
 
             // write new meta data entry
-            String values = meta_info_parsed + "," + percentageOfN + ",'" + user_alias + "','" + haplogroup + "','"
-                    + haplotype + "'," + quality + ",'" + fastaReader.getSequenceMap().get(accessionID) + "'";
+            String values = meta_info_parsed + "," + percentageOfN + ",'" + user_alias + "','" + haplogroup + "','" +
+                    haplogroup.substring(0,2) + "," + haplotype + "'," + quality + ",'" + fastaReader.getSequenceMap().get(accessionID) + "'";
 
             values = values.replace("'NULL'", "NULL");
             values = values.replace("NULL", "");
@@ -166,4 +167,5 @@ public class DataCompleter {
     public String getOutfile() {
         return outfile;
     }
+
 }
