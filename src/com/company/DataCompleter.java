@@ -143,10 +143,15 @@ public class DataCompleter {
                 isheaderWritter = true;
             }
 
+            String macro = "";
+            if(haplogroup.length() > 2)
+                macro = haplogroup.substring(0,2);
+            else
+                macro = haplogroup;
 
             // write new meta data entry
             String values = meta_info_parsed + "," + percentageOfN + ",'" + user_alias + "','" + haplogroup + "','" +
-                    haplogroup.substring(0,2) + "," + haplotype + "'," + quality + ",'" + fastaReader.getSequenceMap().get(accessionID) + "'";
+                     macro + "," + haplotype + "'," + quality + ",'" + fastaReader.getSequenceMap().get(accessionID) + "'";
 
             values = values.replace("'NULL'", "NULL");
             values = values.replace("NULL", "");
